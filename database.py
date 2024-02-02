@@ -4,6 +4,9 @@ import os
 
 def get_wells(depth, gradient):
     connect = os.getenv('WELL_DB')
+    if not connect:
+        raise RuntimeError('No database connection string.  Set the WELL_DB variable.')
+        
     engine = sqlalchemy.create_engine(connect)
     conn = engine.connect()
     
